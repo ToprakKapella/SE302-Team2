@@ -1,0 +1,17 @@
+flowchart TD
+A([User presses Generate]) --> B{courses and classrooms loaded?}
+B -- no --> B1[Show error] --> Z([End])
+B -- yes --> C[quickInfeasibility: exams per student, clique of shared-student courses]
+C -- impossible --> N[Result: no schedule + reason + minimum days] --> M
+C -- possible --> D[Backtracking: pick unplaced course with fewest feasible positions]
+D --> E[Try each day/slot: not same or consecutive slot as a course sharing students, max 2 exams per student per day]
+E --> F[Assign classroom: capacity at least course size, one exam per room per slot]
+F --> G{all courses placed?}
+G -- no --> D
+G -- dead end --> H[Backtrack]
+H --> D
+G -- yes --> I[ConstraintChecker.check independent verification]
+I -- violations --> X[Reject: internal error]
+I -- ok --> S[Show Schedule, enable Views]
+D -- time limit 20 s --> T[Result: no schedule found in time, try more days] --> M
+N --> M[Show message to user; data unchanged]

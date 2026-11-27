@@ -1,0 +1,13 @@
+sequenceDiagram
+actor U as User
+participant G as MainFrame
+participant S as ExamScheduler
+U->>G: Generate (5 days x 4 slots)
+G->>S: generate(...)
+S-->>G: Result(success=false, message)
+G-->>U: message: why impossible, e.g. "at least 10 days are needed"
+U->>G: increases days (or slots), Generate again
+G->>S: generate(...)
+S-->>G: Result(success=true, schedule)
+G-->>U: "A valid schedule was found"
+Note over U,S: Mandatory constraints are never relaxed. The goal "fewest days" tries 1..N days.
