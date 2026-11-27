@@ -1,5 +1,4 @@
 \section{Introduction}
-\draftnote{Toprak}
 This document describes the design of the Exam Scheduler, a desktop application that reads classroom capacities and course registrations from CSV files and generates an exam schedule that satisfies the mandatory constraints of the requirements document (Milestone 1): no student has two exams in the same or in consecutive slots of a day, no student has more than two exams per day, one exam per classroom per slot, classroom capacity is at least the number of registered students, and every course is scheduled exactly once.
 
 Section~2 gives the structural design (classes and packages), Section~3 the behavioral design (import, schedule generation, the no-solution case and the four views), Section~4 the user interface and Section~5 the build and deployment of the application. The application is written in Java with a JavaFX user interface; the installer bundles a Java runtime that includes JavaFX, so that the user does not have to install any software. The classes and packages in this document are the basis of the implementation in Milestone~3.

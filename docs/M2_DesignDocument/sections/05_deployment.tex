@@ -1,5 +1,4 @@
 \section{Build and Deployment Design}
-\draftnote{Toprak}
 \subsection{Project structure and build}
 The source code is kept in the folder \texttt{exam-scheduler/} of the team repository. The packages of Section~2.2 are under \texttt{src/main/java/com/team2/examscheduler}, the help text under \texttt{src/main/resources}, the tests under \texttt{src/test/java} and the sample CSV files under \texttt{sampleData}. The code is compiled with a Java Development Kit against the JavaFX libraries and packed into one file, \texttt{exam-scheduler.jar}, whose entry point is the class \texttt{Main}. Started without arguments, \texttt{Main} opens the JavaFX main window; started with the arguments \texttt{-{}-classrooms}, \texttt{-{}-registrations}, \texttt{-{}-days} and \texttt{-{}-slots}, it generates a schedule from the given files without a window and prints it, which is used for automated tests.
 
