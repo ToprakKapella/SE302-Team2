@@ -1,0 +1,21 @@
+flowchart TB
+subgraph DEV["Team: GitHub repository"]
+  SRC["exam-scheduler/src, sampleData"]
+end
+subgraph CI["GitHub Actions build (windows-latest)"]
+  direction LR
+  B1["Set up JDK 21,<br/>JavaFX SDK + jmods"] --> B2["Compile, run tests,<br/>build exam-scheduler.jar"]
+  B2 --> B3["jpackage app image<br/>with own Java + JavaFX runtime"]
+  B3 --> B4["Smoke test with<br/>bundled runtime only"]
+  B4 --> B5["jpackage --type exe"]
+end
+subgraph REL["GitHub Release (tag v1.0)"]
+  EXE["ExamScheduler-1.0.exe"]
+end
+subgraph PC["User's Windows computer (no Java installed)"]
+  direction LR
+  CSV[("CSV files<br/>on local disk")] -- "File > Import" --> INST["ExamScheduler/<br/>app/exam-scheduler.jar<br/>runtime/ (Java + JavaFX)"]
+end
+SRC -- "push tag or Run workflow" --> CI
+CI --> EXE
+EXE -- "download, double-click, install" --> PC
